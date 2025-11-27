@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kin_dijkstra - Calculateur d'Itinéraire Intelligent</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-route me-2"></i>
+                <strong>Kin_dijkstra</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="fas fa-home me-1"></i>Accueil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/app.html">
+                            <i class="fas fa-map-marked-alt me-1"></i>Page Principale
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/apropos.html">
+                            <i class="fas fa-info-circle me-1"></i>À Propos
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <div class="hero-text animate-fade-in">
+                        <h1 class="display-3 fw-bold mb-4">
+                            <i class="fas fa-route text-primary me-3"></i>
+                            Kin_dijkstra
+                        </h1>
+                        <p class="lead mb-4">
+                            Trouvez le chemin le plus court et le plus efficace entre deux points à Kinshasa
+                        </p>
+                        <p class="mb-5">
+                            Utilisez la puissance de l'algorithme de Dijkstra combinée à Google Maps 
+                            pour optimiser vos déplacements dans la capitale congolaise.
+                        </p>
+                        <a href="pages/app.html" class="btn btn-primary btn-lg px-5 py-3 start-btn" style="background: white; color: #667eea; border: none;">
+                            <i class="fas fa-play me-2"></i>
+                            Commencer
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div class="hero-image animate-slide-in">
+                        <i class="fas fa-map-marked-alt hero-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="display-4 fw-bold mb-3">Fonctionnalités</h2>
+                    <p class="lead text-muted">Découvrez ce qui rend Kin_dijkstra unique</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <h4>Itinéraires Optimisés</h4>
+                        <p>Calculez le chemin le plus court entre deux points avec précision</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-car-side"></i>
+                        </div>
+                        <h4>Multiples Modes</h4>
+                        <p>Voiture, marche, vélo, moto et transport en commun</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h4>Carte Interactive</h4>
+                        <p>Visualisez votre itinéraire sur une carte Google Maps</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h4>Historique</h4>
+                        <p>Sauvegardez et consultez vos itinéraires précédents</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <h4>Partage</h4>
+                        <p>Partagez vos itinéraires avec un simple lien</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h4>Export PDF</h4>
+                        <p>Téléchargez vos itinéraires en format PDF</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="display-4 fw-bold mb-3">Comment ça marche ?</h2>
+                    <p class="lead text-muted">En quelques étapes simples</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h5>Saisissez vos adresses</h5>
+                        <p>Entrez votre point de départ et destination</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h5>Choisissez le mode</h5>
+                        <p>Sélectionnez votre moyen de transport</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h5>Calculez</h5>
+                        <p>Cliquez sur "Calculer l'itinéraire"</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h5>Consultez</h5>
+                        <p>Visualisez votre itinéraire sur la carte</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5 text-center">
+        <div class="container">
+            <h2 class="display-5 fw-bold mb-4">Prêt à commencer ?</h2>
+            <p class="lead mb-5">Découvrez le moyen le plus rapide de vous déplacer à Kinshasa</p>
+            <a href="pages/app.html" class="btn btn-primary btn-lg px-5 py-3" style="background: white; color: #667eea; border: none;">
+                <i class="fas fa-rocket me-2"></i>
+                Commencer maintenant
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 Kin_dijkstra. Tous droits réservés.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">
+                        Développé par <strong>CELESTE</strong>, <strong>DAVID</strong> et <strong>DANIEL</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+commande pour lancer le serveur: 
+python -m http.server 8000
+
+
+lien http
+http://localhost:8000

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kin_dijkstra - Calculateur d'Itinéraire</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-route me-2"></i>
+                <strong>Kin_dijkstra</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">
+                            <i class="fas fa-home me-1"></i>Accueil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="app.html">
+                            <i class="fas fa-map-marked-alt me-1"></i>Page Principale
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="apropos.html">
+                            <i class="fas fa-info-circle me-1"></i>À Propos
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container app-container">
+        <header>
+            <h1>🗺️ Kin_dijkstra</h1>
+            <p class="subtitle">Trouvez le chemin le plus court entre deux points</p>
+        </header>
+
+        <div class="search-panel">
+            <div class="input-group">
+                <label for="start">📍 Point de départ</label>
+                <input type="text" id="start" placeholder="Ex: Gombe, Kinshasa" value="Gombe, Kinshasa">
+            </div>
+
+            <div class="input-group">
+                <label for="end">🎯 Destination</label>
+                <input type="text" id="end" placeholder="Ex: Limete, Kinshasa" value="Limete, Kinshasa">
+            </div>
+
+            <div class="input-group">
+                <label for="travelMode">🚗 Mode de transport</label>
+                <select id="travelMode" class="select-input">
+                    <option value="WALKING" selected>🚶 Marche</option>
+                    <option value="DRIVING">🚗 Voiture</option>
+                    <option value="MOTORCYCLE">🏍️ Moto</option>
+                    <option value="BICYCLING">🚴 Vélo</option>
+                    <option value="TRANSIT">🚌 Transport en commun</option>
+                </select>
+            </div>
+
+            <button id="calculateBtn" class="btn-primary">
+                <span class="btn-text">Calculer l'itinéraire</span>
+                <span class="btn-loader" style="display: none;">⏳</span>
+            </button>
+        </div>
+
+        <div class="results-panel" id="resultsPanel" style="display: none;">
+            <div class="result-card">
+                <div class="result-item">
+                    <span class="result-label">📏 Distance:</span>
+                    <span class="result-value" id="distance">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">⏱️ Durée:</span>
+                    <span class="result-value" id="duration">-</span>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button id="shareBtn" class="btn-secondary">
+                    <span>🔗 Partager l'itinéraire</span>
+                </button>
+                <button id="saveBtn" class="btn-secondary">
+                    <span>💾 Sauvegarder</span>
+                </button>
+                <button id="exportPdfBtn" class="btn-secondary">
+                    <span>📄 Exporter en PDF</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="history-panel" id="historyPanel" style="display: none;">
+            <h3>📚 Historique des recherches</h3>
+            <div id="historyList"></div>
+            <button id="clearHistoryBtn" class="btn-clear">🗑️ Effacer l'historique</button>
+        </div>
+
+        <div id="map" class="map-container"></div>
+
+        <div class="instructions-panel" id="instructionsPanel" style="display: none;">
+            <h3>📋 Instructions de navigation</h3>
+            <div id="instructionsList"></div>
+        </div>
+
+        <div class="share-modal" id="shareModal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>🔗 Partager l'itinéraire</h3>
+                <p>Copiez ce lien pour partager l'itinéraire:</p>
+                <div class="share-link-container">
+                    <input type="text" id="shareLink" readonly>
+                    <button id="copyLinkBtn" class="btn-copy">📋 Copier</button>
+                </div>
+                <p class="share-success" id="shareSuccess" style="display: none;">✅ Lien copié avec succès!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFNjE5G_S4i0XHlh3fLUIarAv7LToyXOk&libraries=places,directions&callback=initMap" async defer></script>
+    <!-- jsPDF pour l'export PDF (chargement asynchrone pour ne pas bloquer) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" async onerror="console.warn('jsPDF non chargé')"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" async onerror="console.warn('html2canvas non chargé')"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>
